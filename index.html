@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHANDU REDDY BLOG</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+        
+        body {
+            background-color: #ff0000;
+            color: #000000;
+            font-family: 'Roboto Mono', Courier, monospace;
+            overflow-x: hidden;
+        }
+        
+        .navbar {
+            background-color: #51db91;
+            border-bottom: 2px solid #16bc61;
+            padding: 10px;
+            position: relative;
+        }
+        
+        .navbar button {
+            color: #caca1c;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            position: absolute;
+            right: 2.5px;
+            top: 10px;
+        }
+        
+        .navbar .menu {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .navbar a {
+            color: #060606;
+            margin: 15px 0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .navbar a:hover {
+            color: #11bf6d;
+        }
+        
+        .terminal {
+            background-color: #51db91;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 50px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+        
+        .prompt {
+            color: #ff0000;
+        }
+        
+        .footer {
+            background-color: #51db91;
+            padding: 10px;
+            border-top: 2px solid #20b327;
+            text-align: center;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .background {
+            background: linear-gradient(-45deg, #d0cfc8, #378546, #096237, #16d446);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col background">
+    <header class="navbar">
+        <nav class="container mx-auto flex justify-center relative">
+            <div class="menu flex flex-col items-center">
+                <a href="#home">Home</a>
+                <a href="writeups">Writeups</a>
+                <a href="tools">Tools</a>
+                <a href="resources">Resources</a>
+                <a href="#about">About Me</a>
+                <a href="contact">Contact</a>
+            </div>
+            <button id="menuButton">☰</button>
+        </nav>
+    </header>
+
+    <main class="flex-grow container mx-auto p-4">
+        <section id="home" class="terminal">
+            <p><span class="prompt">$ </span><span id="helloMessage"></span></p>
+            <p><span class="prompt">$ </span><span id="welcomeMessage"></span></p>
+            <p><span class="prompt">$ </span><span id="mrRobotMessage1"></span></p>
+            <p><span class="prompt">$ </span><span id="mrRobotMessage2"></span></p>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container text-center">
+            <p>&copy; 2024 CHANDU REDDY Blog.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Menu toggle function
+        document.getElementById('menuButton').addEventListener('click', function() {
+            const menu = document.querySelector('.navbar .menu');
+            if (menu.style.display === 'flex') {
+                menu.style.display = 'none';
+            } else {
+                menu.style.display = 'flex';
+            }
+        });
+
+        // Typing effect function
+        function typeMessage(message, elementId, delay, callback) {
+            const typingSpeed = 150; // Adjusted typing speed here
+            const target = document.getElementById(elementId);
+            let index = 0;
+            setTimeout(() => {
+                const typingInterval = setInterval(() => {
+                    if (index < message.length) {
+                        target.textContent += message.charAt(index);
+                        index++;
+                    } else {
+                        clearInterval(typingInterval);
+                        if (callback) callback();
+                    }
+                }, typingSpeed);
+            }, delay);
+        }
+
+        // Call the typing function for each message with callbacks for chaining
+        typeMessage("Hello friend", "helloMessage", 0, () => {
+            typeMessage(" Welcome to the world of CHANDU REDDY", "welcomeMessage", 0, () => {
+                typeMessage("This is my first website", "mrRobotMessage1", 0, () => {
+                    typeMessage("Have a nice day.", "mrRobotMessage2", 0);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
